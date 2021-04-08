@@ -24,14 +24,10 @@ public class GuessGame {
 			if(i!=words.length-1) {
 				hidden[index]=" ";
 				index+=1;
-			}
-			
-			
+			}			
 		}	
 		
-		
 		String num = "(";
-		
 		
 		for(int i=0; i<words.length; i++) {
 			num += words[i].length();
@@ -41,62 +37,55 @@ public class GuessGame {
 		}		
 		num += ")";
 		
-		
-		
 		int guess_rem = 5;
-		
 		char inp;
-		
 		boolean win = false;
 		
-		while(guess_rem>0) {
+		System.out.println("You have 5 chances to guess the word correctly!\n");
 		
-		
-		System.out.print("The Secret Phrase is: ");		
+		while(guess_rem>0) {		
+			System.out.print("The Secret Phrase is: ");		
+			System.out.println(String.join("", hidden) + " " + num);
+			System.out.print("Your guess is: ");
 			
-		System.out.println(String.join("", hidden)+num);
-		
-		System.out.print("Your guess is: ");
-		
-		inp = sc.next().charAt(0);
-		
-		int flag = 0 ;
-		
-		for(int i=0;i<phrase.length();i++) {
-			if(inp==phrase.charAt(i)) {
-				hidden[i] = Character.toString(inp);
-				flag=1;
+			inp = sc.next().charAt(0);
+			int flag = 0 ;
+			
+			for(int i=0;i<phrase.length();i++) {
+				if(inp==phrase.charAt(i)) {
+					hidden[i] = Character.toString(inp);
+					flag=1;
+				}
 			}
-		}
-		
-		if(flag==1) {
-			System.out.println("Correct: You have "+guess_rem+" incorrect guesses remaining.\n");
-		}
-		else {
-			guess_rem-=1;
-			System.out.println("Incorrect: You have "+guess_rem+" incorrect guesses remaining.\n");
-		}
-		
-		boolean available = false;
-		for(int k=0;k<hidden.length;k++) {
-			if(hidden[k]=="_") {
-				available = true;
+			
+			if(flag==1) {
+				System.out.println("Correct: You have "+guess_rem+" incorrect guesses remaining.\n");
+			}
+			else {
+				guess_rem-=1;
+				System.out.println("Incorrect: You have "+guess_rem+" incorrect guesses remaining.\n");
+			}
+			
+			boolean available = false;
+			for(int k=0;k<hidden.length;k++) {
+				if(hidden[k]=="_") {
+					available = true;
+					break;
+				}
+			}
+			
+			if(available==false) {
+				win = true;
+				System.out.println("Hooray! You guessed it!");
 				break;
 			}
+					
 		}
-		
-		if(available==false) {
-			win = true;
-			System.out.println("Hooray! You guessed it!");
-			break;
-		}
-				
-		}
-		
+			
 		if(win==false) {
 			System.out.println("You have lost!");
 		}
-		
+				
 		System.out.println("The secret phrase is: "+phrase);
 	}
 
